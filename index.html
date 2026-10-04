@@ -1,0 +1,718 @@
+TEST çş<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Yaşar Enis Can</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+  :root{
+    --bg:#f6f3ee;
+    --bg-elevated:#ffffff;
+    --surface:#efe9de;
+    --surface-2:#e6ddcd;
+    --border:#ddd2bd;
+    --text:#211d17;
+    --text-dim:#6c6255;
+    --accent:#b8631a;
+    --accent-strong:#8f4c11;
+    --accent-soft:#f1dcb8;
+    --teal:#2c8a80;
+    --teal-soft:#d7ece9;
+    --red:#a8432b;
+    --red-soft:#f3ddd5;
+    --shadow: 0 1px 2px rgba(33,29,23,.06), 0 8px 24px -12px rgba(33,29,23,.18);
+    color-scheme: light;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:#0c0d0f;
+      --bg-elevated:#131519;
+      --surface:#191c21;
+      --surface-2:#21252c;
+      --border:#2b2f37;
+      --text:#ece7dc;
+      --text-dim:#8d9199;
+      --accent:#ffb454;
+      --accent-strong:#ffcb85;
+      --accent-soft:#3a2c17;
+      --teal:#7fd9cf;
+      --teal-soft:#163430;
+      --red:#ff8a70;
+      --red-soft:#3a231d;
+      --shadow: 0 1px 2px rgba(0,0,0,.4), 0 12px 28px -14px rgba(0,0,0,.6);
+      color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#0c0d0f;
+    --bg-elevated:#131519;
+    --surface:#191c21;
+    --surface-2:#21252c;
+    --border:#2b2f37;
+    --text:#ece7dc;
+    --text-dim:#8d9199;
+    --accent:#ffb454;
+    --accent-strong:#ffcb85;
+    --accent-soft:#3a2c17;
+    --teal:#7fd9cf;
+    --teal-soft:#163430;
+    --red:#ff8a70;
+    --red-soft:#3a231d;
+    --shadow: 0 1px 2px rgba(0,0,0,.4), 0 12px 28px -14px rgba(0,0,0,.6);
+    color-scheme: dark;
+  }
+
+  *{box-sizing:border-box;}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:"Sora",system-ui,-apple-system,sans-serif;
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3{font-family:"Sora",system-ui,sans-serif;text-wrap:balance;margin:0;}
+  .mono{font-family:"IBM Plex Mono",ui-monospace,monospace;}
+  a{color:inherit;}
+  ::selection{background:var(--accent-soft);color:var(--text);}
+
+  #page{max-width:920px;margin:0 auto;padding-inline:20px;}
+
+  /* ---------- nav ---------- */
+  .topnav{
+    position:sticky;top:env(safe-area-inset-top,0px);z-index:50;
+    background:color-mix(in srgb, var(--bg) 88%, transparent);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--border);
+  }
+  .topnav-inner{
+    max-width:920px;margin:0 auto;padding:12px 20px;
+    display:flex;align-items:center;justify-content:space-between;gap:16px;
+  }
+  .brand{font-family:"IBM Plex Mono",monospace;font-weight:600;font-size:14px;letter-spacing:.02em;
+    display:flex;align-items:center;gap:8px;white-space:nowrap;}
+  .brand .dot{width:8px;height:8px;border-radius:50%;background:var(--accent);
+    box-shadow:0 0 0 3px var(--accent-soft);flex:none;}
+  .navlinks{display:flex;gap:4px;overflow-x:auto;font-family:"IBM Plex Mono",monospace;font-size:12.5px;}
+  .navlinks a{
+    padding:6px 10px;border-radius:6px;color:var(--text-dim);text-decoration:none;white-space:nowrap;
+    transition:color .15s, background .15s;
+  }
+  .navlinks a:hover{color:var(--text);background:var(--surface);}
+
+  /* ---------- hero ---------- */
+  .hero{position:relative;padding-block:56px 40px;overflow:hidden;border-bottom:1px solid var(--border);}
+  .hero canvas{position:absolute;inset:0;width:100%;height:100%;opacity:.55;}
+  .hero-inner{position:relative;z-index:1;}
+  .kicker{
+    font-family:"IBM Plex Mono",monospace;font-size:12.5px;color:var(--accent);
+    display:flex;align-items:center;gap:8px;margin-bottom:14px;min-height:1.4em;
+  }
+  .kicker .cursor{display:inline-block;width:7px;height:14px;background:var(--accent);
+    animation:blink 1s steps(1) infinite;}
+  @keyframes blink{50%{opacity:0;}}
+  .hero h1{font-size:clamp(30px,6vw,46px);font-weight:800;letter-spacing:-.01em;}
+  .hero .role{
+    margin-top:8px;font-family:"IBM Plex Mono",monospace;font-size:14px;color:var(--text-dim);
+  }
+  .hero .role b{color:var(--teal);font-weight:600;}
+  .hero p.summary{max-width:62ch;margin-top:18px;color:var(--text-dim);font-size:15.5px;}
+  .hero-meta{display:flex;flex-wrap:wrap;gap:10px 18px;margin-top:22px;font-family:"IBM Plex Mono",monospace;font-size:12.5px;color:var(--text-dim);}
+  .hero-meta a{text-decoration:none;border-bottom:1px solid transparent;}
+  .hero-meta a:hover{color:var(--text);border-color:var(--text-dim);}
+
+  /* ---------- sections ---------- */
+  section{padding-block:44px;border-bottom:1px solid var(--border);}
+  section:last-of-type{border-bottom:none;}
+  .section-head{display:flex;align-items:baseline;gap:12px;margin-bottom:24px;}
+  .section-num{font-family:"IBM Plex Mono",monospace;color:var(--accent);font-size:13px;}
+  .section-head h2{font-size:22px;font-weight:700;}
+  .reveal{opacity:1;transform:none;}
+  .reveal.animate-in{animation:fadeUp .5s ease both;}
+  @keyframes fadeUp{from{opacity:.4;transform:translateY(8px);}to{opacity:1;transform:none;}}
+  @media (prefers-reduced-motion: reduce){.reveal.animate-in{animation:none;}}
+
+  /* education / certs */
+  .entry{display:grid;grid-template-columns:1fr auto;gap:4px 12px;padding:16px 0;border-top:1px solid var(--border);}
+  .entry:first-child{border-top:none;padding-top:0;}
+  .entry h3{font-size:16px;font-weight:600;}
+  .entry .org{color:var(--text-dim);font-weight:400;}
+  .entry .when{font-family:"IBM Plex Mono",monospace;font-size:12px;color:var(--text-dim);white-space:nowrap;align-self:start;}
+  .entry .sub{grid-column:1/-1;color:var(--text-dim);font-size:14px;margin-top:2px;}
+  .entry .note{grid-column:1/-1;font-size:14.5px;margin-top:6px;}
+  .tag-status{
+    display:inline-block;font-family:"IBM Plex Mono",monospace;font-size:11px;
+    padding:2px 8px;border-radius:20px;background:var(--teal-soft);color:var(--teal);
+    margin-left:8px;vertical-align:middle;
+  }
+
+  /* projects */
+  .project{
+    background:var(--bg-elevated);border:1px solid var(--border);border-radius:14px;
+    padding:22px 22px 24px;margin-bottom:20px;box-shadow:var(--shadow);
+  }
+  .project-head{display:flex;flex-wrap:wrap;align-items:baseline;gap:10px 14px;margin-bottom:6px;}
+  .project-num{font-family:"IBM Plex Mono",monospace;color:var(--accent);font-size:13px;}
+  .project-head h3{font-size:17px;font-weight:700;}
+  .project-head a.repo{
+    font-family:"IBM Plex Mono",monospace;font-size:12.5px;color:var(--text-dim);text-decoration:none;
+    border-bottom:1px dashed var(--border);
+  }
+  .project-head a.repo:hover{color:var(--accent);border-color:var(--accent);}
+  .project > p.lead{color:var(--text-dim);font-size:14.5px;max-width:70ch;margin-bottom:16px;}
+  .project ul.achieve{list-style:none;padding:0;margin:16px 0 0;display:grid;gap:8px;}
+  .project ul.achieve li{position:relative;padding-left:18px;font-size:14.5px;}
+  .project ul.achieve li::before{content:"›";position:absolute;left:0;color:var(--accent);font-weight:700;}
+
+  /* demo widgets */
+  .demo{
+    background:var(--surface);border:1px solid var(--border);border-radius:10px;
+    padding:16px;margin-top:4px;
+  }
+  .demo-label{font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--text-dim);
+    text-transform:uppercase;letter-spacing:.06em;margin-bottom:12px;}
+  .flow{display:flex;flex-wrap:wrap;gap:8px;align-items:center;font-family:"IBM Plex Mono",monospace;font-size:12px;}
+  .flow .step{
+    padding:7px 11px;border-radius:8px;background:var(--bg-elevated);border:1px solid var(--border);
+    color:var(--text-dim);transition:all .25s;
+  }
+  .flow .step.active{background:var(--accent-soft);color:var(--accent-strong);border-color:var(--accent);}
+  .flow .arrow{color:var(--border);}
+  .demo-btn{
+    font-family:"IBM Plex Mono",monospace;font-size:12.5px;padding:8px 14px;border-radius:8px;
+    background:var(--accent-soft);color:var(--accent-strong);border:1px solid var(--accent);
+    cursor:pointer;transition:transform .15s;
+  }
+  .demo-btn:hover{transform:translateY(-1px);}
+  .demo-btn:active{transform:translateY(0);}
+  .query-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px;margin-bottom:14px;}
+  .query-btn{
+    font-family:"IBM Plex Mono",monospace;font-size:12px;text-align:left;padding:9px 11px;border-radius:8px;
+    background:var(--bg-elevated);border:1px solid var(--border);color:var(--text);cursor:pointer;
+  }
+  .query-btn:hover{border-color:var(--accent);}
+  .query-btn.chosen{border-color:var(--accent);background:var(--accent-soft);color:var(--accent-strong);}
+  .trace-line{font-family:"IBM Plex Mono",monospace;font-size:12.5px;color:var(--text-dim);min-height:1.6em;}
+  .trace-line b{color:var(--teal);}
+  .stat-row{display:flex;flex-wrap:wrap;gap:22px;margin-top:14px;}
+  .stat{font-family:"IBM Plex Mono",monospace;}
+  .stat .n{font-size:20px;font-weight:600;color:var(--accent);font-variant-numeric:tabular-nums;}
+  .stat .l{font-size:11px;color:var(--text-dim);text-transform:uppercase;letter-spacing:.05em;}
+
+  /* backtest chart */
+  .chart-wrap{display:flex;gap:24px;flex-wrap:wrap;align-items:stretch;margin-top:6px;}
+  .bars{display:flex;gap:22px;align-items:flex-end;flex:1 1 260px;min-width:220px;padding-top:6px;}
+  .bar-col{display:flex;flex-direction:column;align-items:center;gap:10px;flex:1;}
+  .bar-track{width:100%;max-width:52px;height:130px;display:flex;align-items:flex-end;background:var(--surface-2);border-radius:6px;overflow:hidden;}
+  .bar-fill{width:100%;border-radius:6px 6px 0 0;transition:height 1s cubic-bezier(.2,.8,.2,1);}
+  .bar-col .v{font-family:"IBM Plex Mono",monospace;font-size:13px;font-weight:600;font-variant-numeric:tabular-nums;line-height:1.2;}
+  .bar-col .lab{font-size:11.5px;color:var(--text-dim);text-align:center;line-height:1.3;}
+  .verdict-box{
+    flex:1 1 240px;background:var(--red-soft);border:1px solid var(--red);border-radius:10px;
+    padding:14px 16px;font-size:14px;color:var(--text);align-self:center;
+  }
+  .verdict-box b{color:var(--red);}
+  .tag-warn{
+    display:inline-block;font-family:"IBM Plex Mono",monospace;font-size:11px;
+    padding:3px 9px;border-radius:20px;background:var(--red-soft);color:var(--red);
+    border:1px solid var(--red);white-space:nowrap;
+  }
+
+  /* skills */
+  .skill-group{margin-bottom:18px;}
+  .skill-group h4{
+    font-family:"IBM Plex Mono",monospace;font-size:11.5px;color:var(--text-dim);
+    text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px;
+  }
+  .chips{display:flex;flex-wrap:wrap;gap:8px;}
+  .chip{
+    display:flex;align-items:center;gap:7px;padding:6px 12px;border-radius:20px;
+    background:var(--surface);border:1px solid var(--border);font-size:13px;
+  }
+  .chip .d{width:6px;height:6px;border-radius:50%;background:var(--accent);flex:none;}
+
+  .traits{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-top:22px;}
+  .trait{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:14px 16px;}
+  .trait .t{font-weight:600;font-size:14px;margin-bottom:4px;}
+  .trait .d{font-size:13.5px;color:var(--text-dim);}
+
+  /* contact */
+  .contact-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px;margin-top:8px;}
+  .cbox{
+    background:var(--bg-elevated);border:1px solid var(--border);border-radius:10px;
+    padding:14px 16px;display:flex;align-items:center;justify-content:space-between;gap:10px;
+  }
+  .cbox .k{font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--text-dim);text-transform:uppercase;letter-spacing:.05em;}
+  .cbox .v{font-size:14px;margin-top:3px;word-break:break-word;}
+  .copybtn{
+    font-family:"IBM Plex Mono",monospace;font-size:11px;padding:6px 10px;border-radius:6px;flex:none;
+    background:var(--surface);border:1px solid var(--border);color:var(--text-dim);cursor:pointer;
+  }
+  .copybtn:hover{color:var(--text);border-color:var(--text-dim);}
+  .linkbtn{
+    display:inline-flex;align-items:center;gap:8px;text-decoration:none;color:var(--text);
+    background:var(--bg-elevated);border:1px solid var(--border);border-radius:10px;padding:14px 16px;font-size:14px;
+  }
+  .linkbtn:hover{border-color:var(--accent);color:var(--accent);}
+
+  footer{padding:26px 0 40px;text-align:center;font-family:"IBM Plex Mono",monospace;font-size:11.5px;color:var(--text-dim);}
+
+  @media (max-width:640px){
+    .hero{padding-block:40px 28px;}
+    section{padding-block:32px;}
+    .entry{grid-template-columns:1fr;}
+    .entry .when{white-space:normal;}
+  }
+</style>
+</head>
+<body>
+
+
+<div class="topnav">
+  <div class="topnav-inner">
+    <div class="brand"><span class="dot"></span>Y.E.CAN</div>
+    <nav class="navlinks">
+      <a href="#top">summary</a>
+      <a href="#education">education</a>
+      <a href="#projects">projects</a>
+      <a href="#skills">skills</a>
+      <a href="#contact">contact</a>
+    </nav>
+  </div>
+</div>
+
+<div id="page">
+
+  <section class="hero" id="top">
+    <canvas id="netCanvas" aria-hidden="true"></canvas>
+    <div class="hero-inner">
+      <div class="kicker mono" id="bootLine">&nbsp;<span class="cursor"></span></div>
+      <h1>Yaşar Enis Can</h1>
+      <div class="role">AI Engineering Student · <b>RAG pipelines</b> · <b>agentic tool-calling</b> · applied ML</div>
+      <p class="summary">Artificial Intelligence Engineering student at Bahçeşehir University with hands-on experience building on-device, agentic AI systems — retrieval-augmented generation (RAG) pipelines and autonomous tool-calling agents — using Microsoft Foundry Local. Strong mathematical foundation and Python proficiency, with a self-driven, detail-oriented approach to shipping and documenting real, working systems end to end. Seeking an AI/ML Engineering internship to keep building production-grade RAG and agentic systems.</p>
+      <div class="hero-meta">
+        <span>Istanbul, Turkey</span>
+        <a href="https://github.com/eniscan17" target="_blank" rel="noopener">github.com/eniscan17</a>
+        <a href="https://linkedin.com/in/yasar-enis-can" target="_blank" rel="noopener">linkedin.com/in/yasar-enis-can</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="education" class="reveal">
+    <div class="section-head"><span class="section-num mono">01</span><h2>Education &amp; Certifications</h2></div>
+    <div>
+      <div class="entry">
+        <h3>Bahçeşehir University (BAU) <span class="org">— Istanbul, Turkey</span></h3>
+        <div class="when">Aug 2023 – Present</div>
+        <div class="sub">B.Sc. in Artificial Intelligence Engineering (100% English)</div>
+        <div class="note">Relevant coursework: Linear Algebra, Statistics &amp; Probability, Principles of AI, Calculus, Data Structures, Introduction to Optimization.</div>
+      </div>
+      <div class="entry">
+        <h3>75. Yıl Fen Lisesi <span class="org">— Akdeniz, Mersin</span></h3>
+        <div class="when">Graduated</div>
+        <div class="sub">Science High School Diploma · 92/100 GPA</div>
+      </div>
+      <div class="entry">
+        <h3>AI Innovators Internship Program <span class="org">— Microsoft</span></h3>
+        <div class="when">Summer 2026<span class="tag-status">completed</span></div>
+        <div class="note">Hands-on, project-based AI internship on Microsoft AI technologies — independently designed and shipped two of the applied AI projects below using Microsoft Foundry Local.</div>
+      </div>
+      <div class="entry">
+        <h3>CS50x: Introduction to Computer Science <span class="org">— Harvard University</span></h3>
+        <div class="when"><span class="tag-status">in progress</span></div>
+      </div>
+      <div class="entry">
+        <h3>Machine Learning Specialization <span class="org">— DeepLearning.AI, Andrew Ng</span></h3>
+        <div class="when"><span class="tag-status">in progress</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="projects" class="reveal">
+    <div class="section-head"><span class="section-num mono">02</span><h2>Projects</h2></div>
+
+    <!-- Project 1: RAG -->
+    <div class="project">
+      <div class="project-head">
+        <span class="project-num">01</span>
+        <h3>Local RAG Assistant</h3>
+        <a class="repo" href="https://github.com/eniscan17/local-rag-assistant" target="_blank" rel="noopener">github.com/eniscan17/local-rag-assistant</a>
+      </div>
+      <p class="lead">A fully offline, on-device Q&amp;A assistant using Microsoft Foundry Local — no cloud, no API keys, no data ever leaving the machine.</p>
+      <div class="demo">
+        <div class="demo-label">pipeline — click to trace a query</div>
+        <div class="flow" id="ragFlow">
+          <span class="step" data-i="0">document</span><span class="arrow">→</span>
+          <span class="step" data-i="1">chunking</span><span class="arrow">→</span>
+          <span class="step" data-i="2">embedding</span><span class="arrow">→</span>
+          <span class="step" data-i="3">cosine retrieval</span><span class="arrow">→</span>
+          <span class="step" data-i="4">relevance guardrail</span><span class="arrow">→</span>
+          <span class="step" data-i="5">answer</span>
+        </div>
+        <div style="margin-top:12px;color:var(--text-dim);font-size:12.5px;">Example query: <b style="color:var(--text);">"What does the guide say about installation?"</b></div>
+        <div style="margin-top:10px;"><button class="demo-btn" id="runRag">run pipeline →</button></div>
+        <div class="trace-line" id="ragTrace" style="margin-top:10px;">click "run pipeline" to see it answer that query, step by step.</div>
+        <div class="stat-row">
+          <div class="stat"><div class="n">95.8%</div><div class="l">retrieval accuracy</div></div>
+          <div class="stat"><div class="n">100%</div><div class="l">guardrail accuracy</div></div>
+          <div class="stat"><div class="n">9×</div><div class="l">latency / accuracy trade-off measured</div></div>
+        </div>
+      </div>
+      <ul class="achieve">
+        <li>Designed a complete RAG pipeline (chunking → embedding → SQLite-based cosine-similarity retrieval) and fixed a model-faithfulness issue with a relevance-threshold guardrail, so the assistant answers only from retrieved context instead of guessing.</li>
+        <li>Built an automated evaluation harness (32 cases) scoring 95.8% retrieval and 100% guardrail accuracy, then benchmarked two chat models to quantify a 9x latency-vs-accuracy trade-off.</li>
+      </ul>
+    </div>
+
+    <!-- Project 2: Tool-calling agent -->
+    <div class="project">
+      <div class="project-head">
+        <span class="project-num">02</span>
+        <h3>Tool-Calling Agent</h3>
+        <a class="repo" href="https://github.com/eniscan17/tool-calling-agent" target="_blank" rel="noopener">github.com/eniscan17/tool-calling-agent</a>
+      </div>
+      <p class="lead">An autonomous agent that decides which tool to call — calculator, Wikipedia search, date/time, or a local knowledge base — chaining multiple tool calls per question.</p>
+      <div class="demo">
+        <div class="demo-label">routing logic — try a query (simulated)</div>
+        <div class="query-grid" id="queryGrid">
+          <button class="query-btn" data-tool="Calculator" data-answer="42">"what's 6 × 7?"</button>
+          <button class="query-btn" data-tool="Wikipedia search" data-answer="1954">"when did Alan Turing die?"</button>
+          <button class="query-btn" data-tool="Date/time" data-answer="live system clock">"what time is it right now?"</button>
+          <button class="query-btn" data-tool="Local knowledge base" data-answer="retrieved from indexed docs">"what did my notes say about optimization?"</button>
+        </div>
+        <div class="trace-line" id="routeTrace">select a query above to see the router's decision.</div>
+      </div>
+      <ul class="achieve">
+        <li>Diagnosed unreliable tool-calling behavior in small on-device models and fixed it with deterministic pre-routing plus automatic context-injection for retrieval — a practical reliability pattern for small-model AI systems.</li>
+        <li>Documented findings, edge cases, and test results publicly on GitHub.</li>
+      </ul>
+    </div>
+
+    <!-- Project 3: Data insights agent -->
+    <div class="project">
+      <div class="project-head">
+        <span class="project-num">03</span>
+        <h3>Data Insights Agent</h3>
+        <a class="repo" href="https://github.com/eniscan17/data-insights-agent" target="_blank" rel="noopener">github.com/eniscan17/data-insights-agent</a>
+      </div>
+      <p class="lead">A natural-language data analysis agent — upload a CSV, ask a question in plain English, and it picks the right tool and runs it on the real DataFrame instead of fabricating an answer.</p>
+      <div class="demo">
+        <div class="demo-label">example — "which artist has the most streams?"</div>
+        <div class="flow">
+          <span class="step active">CSV upload</span><span class="arrow">→</span>
+          <span class="step active">NL question</span><span class="arrow">→</span>
+          <span class="step active">tool: aggregation</span><span class="arrow">→</span>
+          <span class="step">pandas execution</span><span class="arrow">→</span>
+          <span class="step">grounded answer</span>
+        </div>
+      </div>
+      <ul class="achieve">
+        <li>Picks the right tool — filtering, statistics, aggregation, or chart generation — and executes it on the real pandas DataFrame instead of fabricating an answer.</li>
+        <li>Extended the tool-selection reliability pattern to a harder setting with forced deterministic tool selection on a small on-device model (Phi-4-mini via Foundry Local); shipped with a Streamlit UI + CLI, an automated pytest suite, and a CI/CD pipeline.</li>
+      </ul>
+    </div>
+
+    <!-- Project 4: LSTM/GRU -->
+    <div class="project">
+      <div class="project-head">
+        <span class="project-num">04</span>
+        <h3>LSTM/GRU Stock Price Prediction</h3>
+        <span class="tag-warn">honest negative result</span>
+        <a class="repo" href="https://github.com/eniscan17/lstm-stock-prediction" target="_blank" rel="noopener">github.com/eniscan17/lstm-stock-prediction</a>
+      </div>
+      <p class="lead">A from-scratch PyTorch time-series pipeline predicting next-day stock returns — then, instead of stopping at "the model beats a baseline," I tested whether it would actually make money as a real trading strategy. It doesn't, and this section shows that on purpose: catching an overclaim before it ships is the point.</p>
+      <div class="demo">
+        <div class="demo-label">total return, test period — strategy vs. buy &amp; hold</div>
+        <div class="verdict-box" style="margin-bottom:20px;">
+          <b>The result that matters most:</b> a small, statistically real RMSE edge over the naive baseline did <b>not</b> survive being turned into an actual trading strategy. After transaction costs, both models lost to simply buying and holding — verified across 5 random seeds, not one lucky run.
+        </div>
+        <div class="chart-wrap">
+          <div class="bars" id="btChart">
+            <div class="bar-col">
+              <div class="v" data-target="35.59">0%</div>
+              <div class="bar-track"><div class="bar-fill" data-pct="0" style="background:var(--teal);height:0%"></div></div>
+              <div class="lab">Buy &amp; Hold</div>
+            </div>
+            <div class="bar-col">
+              <div class="v" data-target="16.89">0%</div>
+              <div class="bar-track"><div class="bar-fill" data-pct="0" style="background:var(--red);height:0%"></div></div>
+              <div class="lab">LSTM strategy</div>
+            </div>
+            <div class="bar-col">
+              <div class="v" data-target="15.26">0%</div>
+              <div class="bar-track"><div class="bar-fill" data-pct="0" style="background:var(--red);height:0%"></div></div>
+              <div class="lab">GRU strategy</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <ul class="achieve">
+        <li>Fixed a modeling bug across 3 iterations: predicting raw price lost to the naive baseline by 6-7x; predicting returns instead closed the gap.</li>
+        <li>Backtested it as real trades with transaction costs: both models consistently lost to buy-and-hold — a validated negative result that changed the project's real conclusion, before any real capital was involved.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="skills" class="reveal">
+    <div class="section-head"><span class="section-num mono">03</span><h2>Skills &amp; Traits</h2></div>
+
+    <div class="skill-group">
+      <h4>Programming Languages</h4>
+      <div class="chips"><span class="chip"><span class="d"></span>Python</span><span class="chip"><span class="d"></span>C</span><span class="chip"><span class="d"></span>C++</span></div>
+    </div>
+    <div class="skill-group">
+      <h4>AI / Agentic Systems</h4>
+      <div class="chips">
+        <span class="chip"><span class="d"></span>RAG pipelines</span>
+        <span class="chip"><span class="d"></span>Agentic tool-calling</span>
+        <span class="chip"><span class="d"></span>Embeddings &amp; vector search</span>
+        <span class="chip"><span class="d"></span>Prompt engineering</span>
+        <span class="chip"><span class="d"></span>LLM reliability guardrails</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <h4>Data &amp; ML</h4>
+      <div class="chips"><span class="chip"><span class="d"></span>NumPy</span><span class="chip"><span class="d"></span>Pandas</span><span class="chip"><span class="d"></span>PyTorch</span></div>
+    </div>
+    <div class="skill-group">
+      <h4>Platforms &amp; Tools</h4>
+      <div class="chips">
+        <span class="chip"><span class="d"></span>Microsoft Foundry Local</span>
+        <span class="chip"><span class="d"></span>SQLite</span>
+        <span class="chip"><span class="d"></span>Streamlit</span>
+        <span class="chip"><span class="d"></span>Git / GitHub</span>
+        <span class="chip"><span class="d"></span>PyCharm</span>
+        <span class="chip"><span class="d"></span>Jupyter Notebook</span>
+        <span class="chip"><span class="d"></span>VS Code</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <h4>Languages</h4>
+      <div class="chips"><span class="chip"><span class="d"></span>English — B2 (Upper-Intermediate)</span><span class="chip"><span class="d"></span>Turkish — Native</span></div>
+    </div>
+
+    <div class="traits">
+      <div class="trait"><div class="t">Self-driven builder</div><div class="d">Independently designed, built, and documented four AI projects outside coursework.</div></div>
+      <div class="trait"><div class="t">Analytical thinking</div><div class="d">Strong background in pattern recognition and creative problem solving.</div></div>
+    </div>
+  </section>
+
+  <section id="contact" class="reveal">
+    <div class="section-head"><span class="section-num mono">04</span><h2>Contact</h2></div>
+    <div class="contact-grid">
+      <div class="cbox">
+        <div><div class="k">email</div><div class="v" id="emailVal">yasarenis.can@bahcesehir.edu.tr</div></div>
+        <button class="copybtn" data-copy="yasarenis.can@bahcesehir.edu.tr">copy</button>
+      </div>
+      <div class="cbox">
+        <div><div class="k">phone</div><div class="v">+90 535 354 36 87</div></div>
+        <button class="copybtn" data-copy="+905353543687">copy</button>
+      </div>
+      <a class="linkbtn" href="https://linkedin.com/in/yasar-enis-can" target="_blank" rel="noopener">↗ linkedin.com/in/yasar-enis-can</a>
+      <a class="linkbtn" href="https://github.com/eniscan17" target="_blank" rel="noopener">↗ github.com/eniscan17</a>
+    </div>
+  </section>
+
+  <footer>Istanbul, Turkey · built as a live system, not a static page</footer>
+</div>
+
+<script>
+(function(){
+  "use strict";
+  var reduceMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  /* ---- boot / typing intro ---- */
+  var bootEl = document.getElementById("bootLine");
+  var lines = [
+    "$ initializing profile...",
+    "$ loading agent: yasar-enis-can",
+    "$ role: AI Engineering Student — BAU",
+    "$ status: ready"
+  ];
+  function typeLines(el, lines, cb){
+    if (reduceMotion){ el.innerHTML = lines[lines.length-1] + ' <span class="cursor"></span>'; if(cb) cb(); return; }
+    var li = 0, ci = 0;
+    function step(){
+      if (li >= lines.length){ if(cb) cb(); return; }
+      var full = lines[li];
+      ci++;
+      el.innerHTML = full.slice(0, ci) + ' <span class="cursor"></span>';
+      if (ci >= full.length){
+        li++; ci = 0;
+        setTimeout(step, li >= lines.length ? 0 : 260);
+      } else {
+        setTimeout(step, 18);
+      }
+    }
+    step();
+  }
+  if (bootEl) typeLines(bootEl, lines);
+
+  /* ---- reveal on scroll ---- */
+  var reveals = document.querySelectorAll(".reveal");
+  if ("IntersectionObserver" in window && !reduceMotion){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){ if (e.isIntersecting){ e.target.classList.add("animate-in"); io.unobserve(e.target); } });
+    }, {threshold:.12});
+    reveals.forEach(function(el){ io.observe(el); });
+  }
+
+  /* ---- hero network canvas ---- */
+  var canvas = document.getElementById("netCanvas");
+  if (canvas){
+    var ctx = canvas.getContext("2d");
+    var hero = canvas.parentElement;
+    var nodes = [];
+    var W=0, H=0, dpr = Math.min(window.devicePixelRatio||1, 2);
+
+    function resize(){
+      W = hero.clientWidth; H = hero.clientHeight;
+      canvas.width = W*dpr; canvas.height = H*dpr;
+      canvas.style.width = W+"px"; canvas.style.height = H+"px";
+      ctx.setTransform(dpr,0,0,dpr,0,0);
+      var count = Math.max(18, Math.min(46, Math.round(W/34)));
+      nodes = [];
+      for (var i=0;i<count;i++){
+        nodes.push({
+          x: Math.random()*W, y: Math.random()*H,
+          vx:(Math.random()-.5)*.25, vy:(Math.random()-.5)*.25,
+          r: 1.4 + Math.random()*1.8,
+          phase: Math.random()*Math.PI*2
+        });
+      }
+    }
+
+    var accentColor = getComputedStyle(document.documentElement).getPropertyValue("--accent").trim() || "#ffb454";
+
+    function draw(t){
+      ctx.clearRect(0,0,W,H);
+      var maxDist = Math.min(150, W/5);
+      for (var i=0;i<nodes.length;i++){
+        var n = nodes[i];
+        if (!reduceMotion){
+          n.x += n.vx; n.y += n.vy;
+          if (n.x<0||n.x>W) n.vx*=-1;
+          if (n.y<0||n.y>H) n.vy*=-1;
+        }
+      }
+      ctx.lineWidth = 1;
+      for (var a=0;a<nodes.length;a++){
+        for (var b=a+1;b<nodes.length;b++){
+          var dx = nodes[a].x-nodes[b].x, dy = nodes[a].y-nodes[b].y;
+          var d = Math.sqrt(dx*dx+dy*dy);
+          if (d < maxDist){
+            ctx.strokeStyle = "rgba(184,99,26," + (0.18*(1-d/maxDist)) + ")";
+            ctx.beginPath(); ctx.moveTo(nodes[a].x,nodes[a].y); ctx.lineTo(nodes[b].x,nodes[b].y); ctx.stroke();
+          }
+        }
+      }
+      for (var j=0;j<nodes.length;j++){
+        var nd = nodes[j];
+        var pulse = reduceMotion ? 1 : (0.6 + 0.4*Math.sin((t||0)/900 + nd.phase));
+        ctx.beginPath();
+        ctx.arc(nd.x, nd.y, nd.r*pulse, 0, Math.PI*2);
+        ctx.fillStyle = "rgba(184,99,26," + (0.45*pulse+0.25) + ")";
+        ctx.fill();
+      }
+      if (!reduceMotion) requestAnimationFrame(draw);
+    }
+    resize();
+    window.addEventListener("resize", resize);
+    draw(0);
+  }
+
+  /* ---- RAG pipeline demo ---- */
+  var ragBtn = document.getElementById("runRag");
+  var ragTrace = document.getElementById("ragTrace");
+  var ragMsgs = [
+    "→ 1 local document loaded (offline, no upload — Foundry Local)",
+    "→ split into 18 overlapping chunks",
+    "→ chunks embedded locally, no API calls",
+    "→ top-3 chunks retrieved by cosine similarity (best score: 0.91)",
+    "→ similarity clears the relevance threshold — context accepted",
+    '→ answer: <b>"Installation requires Python 3.10+ and the steps in section 2."</b> (grounded in retrieved text only — if nothing had cleared the threshold, it would refuse instead of guessing)'
+  ];
+  if (ragBtn){
+    ragBtn.addEventListener("click", function(){
+      var steps = document.querySelectorAll("#ragFlow .step");
+      steps.forEach(function(s){ s.classList.remove("active"); });
+      var i = 0;
+      ragBtn.disabled = true;
+      if (ragTrace) ragTrace.innerHTML = "";
+      var iv = setInterval(function(){
+        if (steps[i]) steps[i].classList.add("active");
+        if (ragTrace && ragMsgs[i]) ragTrace.innerHTML = ragMsgs[i];
+        i++;
+        if (i>=steps.length){ clearInterval(iv); ragBtn.disabled = false; }
+      }, 420);
+    });
+  }
+
+  /* ---- tool router demo ---- */
+  var qBtns = document.querySelectorAll(".query-btn");
+  var trace = document.getElementById("routeTrace");
+  qBtns.forEach(function(btn){
+    btn.addEventListener("click", function(){
+      qBtns.forEach(function(b){ b.classList.remove("chosen"); });
+      btn.classList.add("chosen");
+      var tool = btn.getAttribute("data-tool");
+      var answer = btn.getAttribute("data-answer");
+      trace.innerHTML = "";
+      var msgs = [
+        "→ query received",
+        "→ deterministic pre-router classifies intent",
+        '→ tool selected: <b>' + tool + "</b>",
+        "→ result: " + answer
+      ];
+      var idx = 0;
+      function next(){
+        if (idx>=msgs.length) return;
+        trace.innerHTML = msgs.slice(0, idx+1).join("<br>");
+        idx++;
+        setTimeout(next, reduceMotion ? 0 : 260);
+      }
+      next();
+    });
+  });
+
+  /* ---- backtest bars ---- */
+  var chart = document.getElementById("btChart");
+  function animateBars(){
+    var cols = chart.querySelectorAll(".bar-col");
+    cols.forEach(function(col){
+      var valEl = col.querySelector(".v");
+      var fill = col.querySelector(".bar-fill");
+      var target = parseFloat(valEl.getAttribute("data-target"));
+      var pct = Math.max(6, (target/40)*100);
+      fill.style.height = pct + "%";
+      valEl.textContent = "+" + target.toFixed(2) + "%";
+    });
+  }
+  if (chart){ animateBars(); }
+
+  /* ---- copy buttons ---- */
+  document.querySelectorAll(".copybtn").forEach(function(btn){
+    btn.addEventListener("click", function(){
+      var val = btn.getAttribute("data-copy");
+      var done = function(){ var orig = btn.textContent; btn.textContent = "copied"; setTimeout(function(){ btn.textContent = orig; }, 1200); };
+      try{
+        navigator.clipboard.writeText(val).then(done, function(){ fallbackCopy(val, done); });
+      } catch(e){ fallbackCopy(val, done); }
+    });
+  });
+  function fallbackCopy(text, cb){
+    try{
+      var ta = document.createElement("textarea");
+      ta.value = text; ta.style.position="fixed"; ta.style.opacity="0";
+      document.body.appendChild(ta); ta.focus(); ta.select();
+      document.execCommand("copy"); document.body.removeChild(ta);
+      if (cb) cb();
+    }catch(e){}
+  }
+})();
+</script>
+
+</body>
+</html>
