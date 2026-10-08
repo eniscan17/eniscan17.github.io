@@ -203,12 +203,12 @@
 
   /* backtest chart */
   .chart-wrap{display:flex;gap:24px;flex-wrap:wrap;align-items:stretch;margin-top:6px;}
-  .bars{display:flex;gap:22px;align-items:flex-end;flex:1 1 260px;min-width:220px;padding-top:6px;}
+  .bars{display:flex;gap:22px;align-items:flex-start;flex:1 1 260px;min-width:220px;padding-top:6px;}
   .bar-col{display:flex;flex-direction:column;align-items:center;gap:10px;flex:1;}
   .bar-track{width:100%;max-width:52px;height:130px;display:flex;align-items:flex-end;background:var(--surface-2);border-radius:6px;overflow:hidden;}
   .bar-fill{width:100%;border-radius:6px 6px 0 0;transition:height 1s cubic-bezier(.2,.8,.2,1);}
   .bar-col .v{font-family:"IBM Plex Mono",monospace;font-size:13px;font-weight:600;font-variant-numeric:tabular-nums;line-height:1.2;}
-  .bar-col .lab{font-size:11.5px;color:var(--text-dim);text-align:center;line-height:1.3;}
+  .bar-col .lab{font-size:11.5px;color:var(--text-dim);text-align:center;line-height:1.3;min-height:2.6em;}
   .verdict-box{
     flex:1 1 240px;background:var(--red-soft);border:1px solid var(--red);border-radius:10px;
     padding:14px 16px;font-size:14px;color:var(--text);align-self:center;
@@ -683,6 +683,12 @@
       btn.classList.add("chosen");
       var tool = btn.getAttribute("data-tool");
       var answer = btn.getAttribute("data-answer");
+      if (tool === "Date/time"){
+        var now = new Date();
+        try {
+          answer = now.toLocaleString("en-GB", {timeZone:"Europe/Istanbul", weekday:"short", day:"numeric", month:"short", year:"numeric", hour:"2-digit", minute:"2-digit"}) + " (Istanbul time, read live from the system clock)";
+        } catch(e){ answer = now.toString(); }
+      }
       trace.innerHTML = "";
       var msgs = [
         "→ query received",
