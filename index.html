@@ -272,6 +272,16 @@
     .entry{grid-template-columns:1fr;}
     .entry .when{white-space:normal;}
   }
+  .flags{display:flex;flex-direction:column;gap:6px;min-height:3.2em;margin-bottom:10px;}
+  .fl{display:flex;gap:10px;align-items:baseline;font-size:14px;}
+  .fl .sev{font-family:"IBM Plex Mono",monospace;font-size:11px;text-transform:uppercase;letter-spacing:.05em;
+    padding:1px 7px;border-radius:20px;border:1px solid;white-space:nowrap;min-width:76px;text-align:center;flex:none;}
+  .fl.critical .sev{color:var(--red);border-color:var(--red);background:var(--red-soft);}
+  .fl.serious .sev{color:var(--accent-strong);border-color:var(--accent);background:var(--accent-soft);}
+  .fl.warning .sev{color:var(--text-dim);border-color:var(--border);}
+  .fl.ok{color:var(--text-dim);}
+  .notes-line{font-size:13.5px;color:var(--text-dim);border-top:1px dashed var(--border);padding-top:8px;}
+  .notes-line b{color:var(--teal);font-weight:600;}
 </style>
 </head>
 <body>
@@ -298,8 +308,8 @@
     <div class="hero-inner">
       <div class="kicker mono" id="bootLine">&nbsp;<span class="cursor"></span></div>
       <h1>Yaşar Enis Can</h1>
-      <div class="role">AI Engineering Student · <b>RAG pipelines</b> · <b>LLM evaluation</b> · agentic AI</div>
-      <p class="summary">Artificial Intelligence Engineering student at Bahçeşehir University and Microsoft AI Innovators intern, building on-device RAG and agentic AI systems with Microsoft Foundry Local — and measuring them: bilingual (English/Turkish) retrieval and answer-quality evaluation with statistical confidence intervals. Seeking an AI/ML Engineering internship to build and rigorously evaluate production-grade LLM systems.</p>
+      <div class="role">AI Engineering Student · <b>LLM evaluation</b> · <b>RAG pipelines</b> · AI for finance</div>
+      <p class="summary">Artificial Intelligence Engineering student at Bahçeşehir University and Microsoft AI Innovators intern, building on-device LLM systems and measuring them rigorously: bilingual (English/Turkish) RAG evaluation with confidence intervals, and a credit-analysis assistant that reads Turkish company filings with verified, source-linked outputs. Seeking an AI/ML Engineering internship, with a particular interest in AI for banking and finance.</p>
       <div class="hero-meta">
         <span>Istanbul, Turkey</span>
         <a href="https://github.com/eniscan17" target="_blank" rel="noopener">github.com/eniscan17</a>
@@ -371,10 +381,43 @@
   <section id="projects" class="reveal">
     <div class="section-head"><span class="section-num mono">03</span><h2>Projects</h2></div>
 
-    <!-- Project 1: Bilingual RAG evaluation -->
+    <!-- Project 1: Credit analysis assistant -->
     <div class="project">
       <div class="project-head">
         <span class="project-num">01</span>
+        <h3>Credit Analysis Assistant (Turkish filings, KAP)</h3>
+        <a class="repo" href="https://github.com/eniscan17/credit-analysis-assistant" target="_blank" rel="noopener">github.com/eniscan17/credit-analysis-assistant</a>
+      </div>
+      <p class="lead">The first steps of a bank's corporate credit analysis, automated on public filings of 10 BIST companies (112 reports). Numbers come from code, never from a language model: ratios from XBRL statements, with inflation-accounting restatement and trailing-12-month figures. A local LLM reads only the narrative notes (lawsuits, fines), and every claim it makes is checked against the cited PDF page.</p>
+      <div class="demo">
+        <div class="demo-label">early-warning flags, latest filing (H1 2026) — pick a company</div>
+        <div class="query-grid" id="creditGrid">
+          <button class="query-btn" data-co="ARCLK">Arçelik</button>
+          <button class="query-btn" data-co="SISE">Şişecam</button>
+          <button class="query-btn" data-co="THYAO">Turkish Airlines</button>
+          <button class="query-btn" data-co="EREGL">Erdemir</button>
+          <button class="query-btn" data-co="TUPRS">Tüpraş</button>
+        </div>
+        <div class="flags" id="creditFlags"><div class="fl ok">select a company above to see its flags.</div></div>
+        <div class="notes-line" id="creditNotes"></div>
+        <div class="stat-row">
+          <div class="stat"><div class="n">4/4</div><div class="l">material legal matters, held-out year</div></div>
+          <div class="stat"><div class="n">9/10</div><div class="l">FX position, held-out year</div></div>
+          <div class="stat"><div class="n">112</div><div class="l">reports processed</div></div>
+        </div>
+      </div>
+      <ul class="achieve">
+        <li>Ratios (net debt/EBITDA, interest coverage, liquidity, refinancing risk) validated against the companies' published figures; threshold breaches become early-warning flags.</li>
+        <li>Net FX position read from the notes by layout-aware rules: 9/10 on a held-out year, where the LLM alone scored 7/10 by picking last year's column.</li>
+        <li>Lawsuits and regulatory fines extracted by qwen2.5-7b and kept only if the quote and its figures appear on the cited page. On FY2024 reports labelled before the run, it found 4/4 material matters, including a 1.3 bn TL competition fine disclosed as a subsequent event.</li>
+        <li>Generates a one-page Turkish credit summary per company, every figure linked to its KAP source page.</li>
+      </ul>
+    </div>
+
+    <!-- Project 2: Bilingual RAG evaluation -->
+    <div class="project">
+      <div class="project-head">
+        <span class="project-num">02</span>
         <h3>Bilingual RAG Evaluation (EN/TR)</h3>
         <a class="repo" href="https://github.com/eniscan17/local-rag-assistant" target="_blank" rel="noopener">github.com/eniscan17/local-rag-assistant</a>
       </div>
@@ -414,7 +457,7 @@
     <!-- Project 2: On-device agents -->
     <div class="project">
       <div class="project-head">
-        <span class="project-num">02</span>
+        <span class="project-num">03</span>
         <h3>On-Device AI Agents</h3>
         <a class="repo" href="https://github.com/eniscan17/tool-calling-agent" target="_blank" rel="noopener">tool-calling-agent</a>
         <a class="repo" href="https://github.com/eniscan17/data-insights-agent" target="_blank" rel="noopener">data-insights-agent</a>
@@ -426,7 +469,7 @@
           <button class="query-btn" data-tool="Calculator" data-answer="42">"what's 6 × 7?"</button>
           <button class="query-btn" data-tool="Wikipedia search" data-answer="1954">"when did Alan Turing die?"</button>
           <button class="query-btn" data-tool="Date/time" data-answer="live system clock">"what time is it right now?"</button>
-          <button class="query-btn" data-tool="Local knowledge base" data-answer="retrieved from indexed docs">"what did my notes say about optimization?"</button>
+          <button class="query-btn" data-tool="Local knowledge base" data-answer="top match optimization_notes.md (similarity 0.84) → &quot;Your notes cover gradient descent: scale features first, then tune the learning rate.&quot; (answer grounded in the retrieved chunk)">"what did my notes say about optimization?"</button>
         </div>
         <div class="trace-line" id="routeTrace">select a query above to see the router's decision.</div>
       </div>
@@ -439,7 +482,7 @@
     <!-- Project 4: LSTM/GRU -->
     <div class="project">
       <div class="project-head">
-        <span class="project-num">03</span>
+        <span class="project-num">04</span>
         <h3>LSTM/GRU Stock Price Prediction</h3>
         <span class="tag-warn">honest negative result</span>
         <a class="repo" href="https://github.com/eniscan17/lstm-stock-prediction" target="_blank" rel="noopener">github.com/eniscan17/lstm-stock-prediction</a>
@@ -498,7 +541,7 @@
     </div>
     <div class="skill-group">
       <h4>Data &amp; ML</h4>
-      <div class="chips"><span class="chip"><span class="d"></span>NumPy</span><span class="chip"><span class="d"></span>Pandas</span><span class="chip"><span class="d"></span>PyTorch</span><span class="chip"><span class="d"></span>sentence-transformers</span></div>
+      <div class="chips"><span class="chip"><span class="d"></span>NumPy</span><span class="chip"><span class="d"></span>Pandas</span><span class="chip"><span class="d"></span>PyTorch</span><span class="chip"><span class="d"></span>sentence-transformers</span><span class="chip"><span class="d"></span>XBRL financial statements</span><span class="chip"><span class="d"></span>Credit ratios</span><span class="chip"><span class="d"></span>PDF table &amp; text extraction</span></div>
     </div>
     <div class="skill-group">
       <h4>Platforms &amp; Tools</h4>
@@ -752,6 +795,32 @@
       if (cb) cb();
     }catch(e){}
   }
+})();
+</script>
+<script>
+(function(){
+  var D={
+    ARCLK:{f:[["critical","Net debt / EBITDA 6.0x, above 4.5x"],["serious","Net FX short position = 93% of equity"],["serious","EBITDA / interest paid 1.1x, below 2.0x"],["warning","Current ratio 0.99, below 1.0"],["warning","58% of debt due within a year"]],
+           n:"Competition-law case inherited with the Whirlpool deal, €62.5m (annual report notes, p. 64)"},
+    SISE:{f:[["critical","Net debt / EBITDA 7.4x, above 4.5x"],["serious","EBITDA / interest paid 0.9x, below 2.0x"]],
+          n:"Competition Board fine, provision of 2.37 bn TL (annual report notes, p. 89)"},
+    THYAO:{f:[["serious","Net debt / EBITDA 4.3x, above 3.0x"],["serious","Net FX short position = 26% of equity"],["warning","Current ratio 0.90, below 1.0"]],
+           n:"No material lawsuit or fine found in the notes"},
+    EREGL:{f:[["serious","EBITDA / interest paid 1.9x, below 2.0x"]],
+           n:"Municipal administrative fines of 258.7m TL; Tata Steel damages claim of $4.8m (notes, pp. 70-71)"},
+    TUPRS:{f:[],n:"No material lawsuit or fine found in the notes"}
+  };
+  var grid=document.getElementById('creditGrid'); if(!grid) return;
+  var out=document.getElementById('creditFlags'), notes=document.getElementById('creditNotes');
+  grid.addEventListener('click',function(e){
+    var b=e.target.closest('button'); if(!b) return;
+    grid.querySelectorAll('button').forEach(function(x){x.classList.toggle('chosen',x===b);});
+    var d=D[b.dataset.co]; out.innerHTML='';
+    if(!d.f.length){out.innerHTML='<div class="fl ok">no thresholds breached (net cash or comfortable ratios)</div>';}
+    d.f.forEach(function(x){var r=document.createElement('div');r.className='fl '+x[0];
+      r.innerHTML='<span class="sev">'+x[0]+'</span><span></span>';r.lastChild.textContent=x[1];out.appendChild(r);});
+    notes.innerHTML='<b>From the notes (LLM, quote-verified):</b> ';notes.appendChild(document.createTextNode(d.n));
+  });
 })();
 </script>
 
